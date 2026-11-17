@@ -1,0 +1,16 @@
+name: Bug report
+description: Report a reproducible overlay problem
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected behavior and actual behavior
+      description: Use demo data if possible. Remove Steam IDs, API keys, paths and account details.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Overlay, Windows, Python and OBS versions
+    validations:
+      required: true

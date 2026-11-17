@@ -1,0 +1,61 @@
+name: Checks
+on: [push, pull_request]
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.14']
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Python syntax and standard-library dependencies
+        run: |
+          python -m compileall -q .
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -S -c "import sqlite3, ssl, server"
+      - name: Unit and loopback HTTP tests
+        run: python -m unittest discover -s tests -v
+      - name: Windows installers
+        if: matrix.python == '3.14'
+        shell: powershell
+        run: .\tests\windows_scripts.ps1
+      - name: Build and validate Windows ZIP
+        if: matrix.python == '3.14'
+        run: python scripts/build_release.py
+
+  javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: JavaScript syntax
+        run: |
+          node --check web/app.js
+          node --check web/settings.js
+          node --check tests/browser_smoke.mjs
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Scan Git history
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/repo:ro" \
+            -e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0=/repo \
+            ghcr.io/gitleaks/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f \
+            git --redact --log-opts="--all" /repo

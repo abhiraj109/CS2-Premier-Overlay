@@ -1,0 +1,13 @@
+{
+  "provider": {"name": "Counter-Strike 2", "appid": 730, "steamid": "76561202255233023"},
+  "auth": {"token": "cs2-premier-obs-local"},
+  "map": {
+    "mode": "competitive", "name": "de_mirage", "phase": "live", "round": 13,
+    "team_ct": {"score": 8}, "team_t": {"score": 5}
+  },
+  "round": {"phase": "live"},
+  "player": {
+    "name": "Astra", "steamid": "76561202255233023", "activity": "playing", "team": "CT",
+    "match_stats": {"kills": 18, "deaths": 9, "assists": 4}
+  }
+}

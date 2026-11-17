@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS2 Premier Sync · One-time setup</title>
+  <link rel="stylesheet" href="/web/settings.css">
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="brand"><span class="brand-mark">CS2</span><div><b>PREMIER SYNC</b><small>COMPACT OBS PROFILE OVERLAY</small></div></div>
+      <a href="/?demo=1" target="_blank" rel="noopener noreferrer">OPEN PREVIEW ↗</a>
+    </header>
+    <section class="intro">
+      <span class="eyebrow">SETUP ONCE</span>
+      <h1>Steam and profile sync</h1>
+      <p>The overlay detects your Steam account and refreshes your public Leetify profile while it runs.</p>
+    </section>
+    <section class="card">
+      <div class="section-head"><div><small>STEAM ACCOUNT</small><h2>Automatic detection</h2></div><span class="status-dot" id="status-dot"></span></div>
+      <p class="status-title" id="detect-title">Checking Steam…</p>
+      <p class="status-detail" id="detect-detail">Looking for the active Steam account in your local Steam config.</p>
+      <label class="field" for="steam-id">SteamID64 <span>Leave blank to use automatic detection</span></label>
+      <input id="steam-id" inputmode="numeric" autocomplete="off" maxlength="17" placeholder="7656119xxxxxxxxxx">
+      <div class="actions"><button id="save">SAVE ONCE</button><button id="refresh" class="secondary">SYNC NOW</button></div>
+      <p class="feedback" id="feedback" role="status">Checking profile status…</p>
+    </section>
+    <section class="card data-card">
+      <div class="section-head"><div><small>AUTOMATION</small><h2>What updates automatically</h2></div></div>
+      <div class="data-row"><b>Premier Rating</b><span>Public Leetify profile</span></div>
+      <div class="data-row"><b>Last 20 match stats</b><span>Processed Premier / matchmaking history</span></div>
+      <div class="data-row"><b>Last 5 match results</b><span>Wins, losses and draws from available history</span></div>
+      <div class="data-row"><b>Live player name and match state</b><span>CS2 Game State Integration</span></div>
+      <p class="note">A public Leetify profile with processed matches supplies the rating and full stats. When that history is unavailable, the overlay can use matches it recorded from CS2 locally.</p>
+    </section>
+    <footer><span>INDEPENDENT COMMUNITY OVERLAY</span><span>NOT AFFILIATED WITH VALVE OR LEETIFY</span></footer>
+  </main>
+  <script src="/web/settings.js"></script>
+</body>
+</html>

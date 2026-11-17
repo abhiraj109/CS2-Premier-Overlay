@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>CS2 Premier Sync</title>
+  <link rel="stylesheet" href="./web/styles.css">
+  <script defer src="./web/app.js"></script>
+</head>
+<body>
+  <main class="widget" id="widget" data-band="unrated" aria-label="CS2 Premier Sync player statistics">
+    <header class="top-row">
+      <div class="brand">
+        <span class="brand-mark">CS2</span>
+        <span>PREMIER <b>SYNC</b></span>
+      </div>
+      <span class="season" title="Valve Premier season verified November 2026">SEASON 5</span>
+      <span class="sample" id="sample" hidden>SAMPLE DATA</span>
+      <a class="attribution" id="attribution" href="https://leetify.com/" target="_blank" rel="noopener noreferrer" hidden>
+        <img src="/web/leetify-attribution.png" alt="Data provided by Leetify" width="61" height="26">
+      </a>
+      <div class="form" id="form" aria-label="Five most recent match results">
+        <span class="tile">–</span><span class="tile">–</span><span class="tile">–</span><span class="tile">–</span><span class="tile">–</span>
+      </div>
+    </header>
+
+    <div class="player-row">
+      <div class="identity">
+        <div class="avatar" aria-hidden="true">
+          <span id="initials">CS</span>
+          <img id="avatar" alt="" referrerpolicy="no-referrer" hidden>
+        </div>
+        <div class="identity-text">
+          <strong id="name">Waiting for Steam</strong>
+          <span class="account" id="account">No account detected</span>
+          <span class="live" id="live" hidden></span>
+        </div>
+      </div>
+      <div class="rating">
+        <div class="rating-label">PREMIER RATING</div>
+        <div class="rating-value">
+          <strong id="rating">—</strong>
+          <span class="delta" id="delta" title="Change since the previous distinct verified rating snapshot" hidden></span>
+        </div>
+      </div>
+    </div>
+
+    <section class="history" aria-labelledby="history-title">
+      <div class="history-heading">
+        <h1 id="history-title">LAST 20 MATCHES</h1>
+        <span class="match-count" id="match-count">0 / 20</span>
+        <time id="updated">Waiting for profile</time>
+        <a id="profile-link" href="https://leetify.com/" target="_blank" rel="noopener noreferrer" hidden>View on Leetify</a>
+      </div>
+      <dl class="stats">
+        <div><dd id="kd">—</dd><dt>K/D</dt></div>
+        <div><dd id="kr">—</dd><dt>K/R</dt></div>
+        <div><dd id="adr">—</dd><dt>ADR</dt></div>
+        <div><dd id="avg_kills">—</dd><dt>AVG KILLS</dt></div>
+        <div><dd id="hs_percent">—</dd><dt>HS%</dt></div>
+        <div><dd id="win_percent">—</dd><dt>WIN RATE</dt></div>
+      </dl>
+    </section>
+  </main>
+</body>
+</html>
