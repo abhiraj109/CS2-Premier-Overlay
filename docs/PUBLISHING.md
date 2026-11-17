@@ -1,6 +1,6 @@
 # Publish the project on GitHub
 
-The local branch is `main`. The project uses the [MIT License](../LICENSE). Resolve the [Leetify terms review](THIRD_PARTY.md) before publishing the current integration.
+The local branch is `main`. The project uses the [MIT License](../LICENSE). See [third-party notices](THIRD_PARTY.md) for the Leetify integration and its outstanding terms questions.
 
 1. Run the checks in [CONTRIBUTING.md](../CONTRIBUTING.md) and build with `python scripts/build_release.py`. Extract and smoke-test the final ZIP. Record its SHA-256. Review the final source and asset permissions, including the provider attribution mark and copyright for contributed code.
 2. Stage the reviewed source, then inspect its contents and run a redacted secret scan. Confirm the Git author email is one you want published. GitHub offers a [noreply email configuration](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address).
