@@ -30,7 +30,7 @@ def main() -> None:
         raise SystemExit("VERSION must be in major.minor.patch form.")
     licensed = (ROOT / "LICENSE").is_file()
     files = sorted([*FILES, "LICENSE"] if licensed else FILES)
-    name = f"CS2-Premier-Overlay-{version}"
+    name = f"cs2-roundframe-{version}"
     dist = ROOT / "dist"
     dist.mkdir(exist_ok=True)
     archive = dist / f"{name}-windows{'-candidate' if not licensed else ''}.zip"

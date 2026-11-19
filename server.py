@@ -236,7 +236,7 @@ def send_json(handler: BaseHTTPRequestHandler, data: Any, status: int = 200) -> 
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "CS2PremierOverlay"
+    server_version = "RoundframeForCS2"
     sys_version = ""
 
     def setup(self) -> None:
@@ -384,9 +384,9 @@ def main() -> None:
             with urlopen(request, timeout=3) as response:
                 if json.load(response) != {"ok": True}:
                     raise ValueError("Unexpected response")
-            print("CS2 Premier Sync stopped.")
+            print("Roundframe for CS2 stopped.")
         except (OSError, ValueError):
-            raise SystemExit("Could not stop CS2 Premier Sync. Check whether it is running on port 3000.")
+            raise SystemExit("Could not stop Roundframe for CS2. Check whether it is running on port 3000.")
         return
     try:
         server = ThreadingHTTPServer((HOST, PORT), Handler)

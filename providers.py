@@ -125,7 +125,7 @@ def parse_profile(profile: dict, steam_id: str, matches: Any = None) -> dict:
 
 
 def http_json(url: str, api_key: str = "") -> Any:
-    request = Request(url, headers={"Accept": "application/json", "User-Agent": "CS2-Premier-OBS-Overlay"})
+    request = Request(url, headers={"Accept": "application/json", "User-Agent": "Roundframe-CS2"})
     if api_key:
         request.add_unredirected_header("Authorization", f"Bearer {api_key}")
     with urlopen(request, timeout=8) as response:

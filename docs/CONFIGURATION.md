@@ -1,4 +1,4 @@
-# Configuration and statistics
+# Roundframe configuration and statistics
 
 | Setting | How to change it |
 | --- | --- |
@@ -7,6 +7,10 @@
 | Local-only statistics | From Command Prompt in the project folder, run `run_overlay.bat --offline`. This disables Leetify sync for that process. |
 | OBS viewport | Use 640 × 180 in Browser Source properties. Apply the output scale in OBS. |
 | GSI endpoint | Use the supplied config. The normal install uses `127.0.0.1:3000/gsi`. |
+
+## Leetify API key
+
+Leetify profile requests work without a key, subject to the public API's unauthenticated limits. To use your key, open Windows **Edit environment variables for your account**, add a user variable named `LEETIFY_API_KEY`, and paste the key from the [Leetify developer page](https://leetify.com/app/developer) as its value. Save the change, close the overlay, and start it again so Windows passes the variable to Python. Do not paste the key into project files, GitHub issues, or screenshots. `run_overlay.bat --offline` disables provider requests for that run.
 
 The server creates `%LOCALAPPDATA%\CS2PremierOverlay` at startup. Settings are saved atomically to `settings.json`; [blank example](../examples/example_config.json). SQLite creates `match_history.sqlite3` as needed. The application logs to its console.
 

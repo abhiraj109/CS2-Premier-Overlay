@@ -2,7 +2,7 @@
 setlocal
 cd /d "%~dp0"
 echo ==============================================
-echo       CS2 PREMIER SYNC - ONE-TIME SETUP
+echo       ROUNDFRAME FOR CS2 - ONE-TIME SETUP
 echo ==============================================
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0install_gsi.ps1"

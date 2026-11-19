@@ -22,7 +22,7 @@ if errorlevel 1 (
   exit /b 1
 )
 echo.
-echo Starting CS2 Premier Sync Overlay...
+echo Starting Roundframe for CS2...
 echo OBS Browser Source: http://127.0.0.1:3000/
 echo Browser Source size: 640 x 180
 echo One-time fallback setup: http://127.0.0.1:3000/settings

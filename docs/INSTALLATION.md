@@ -1,10 +1,10 @@
-# Install on Windows 10 or 11
+# Install Roundframe on Windows 10 or 11
 
 You need [Python 3.10+](https://www.python.org/downloads/windows/), [OBS Studio](https://obsproject.com/download), and Steam with CS2 for live use. Install Python for your Windows user and enable the launcher or the PATH option. Open a new Command Prompt and try `py -3 --version` or `python --version`. The overlay does not require pip packages or administrator privileges when you can write to your CS2 install.
 
 ## Extract and configure CS2
 
-1. From GitHub **Releases**, download the versioned Windows ZIP once a public release is available. For a local candidate, use the ZIP supplied by the maintainer. Right-click the ZIP and choose **Extract All**. Pick a permanent directory you can write to, such as a folder under Documents.
+1. From [Roundframe for CS2 Releases](https://github.com/abhiraj109/cs2-roundframe/releases/latest), download the Windows ZIP. For a local candidate, use the ZIP supplied by the maintainer. Right-click the ZIP and choose **Extract All**. Pick a permanent directory you can write to, such as a folder under Documents.
 2. Open the extracted folder and double-click `setup_once.bat`. It uses Steam's registry entries and library list to locate CS2 and copies the GSI config. Answer **N** to launch manually or **Y** to add a Startup shortcut for this folder.
 3. If automatic setup cannot find CS2, right-click CS2 in Steam and choose **Manage → Browse local files**. Copy `gsi/gamestate_integration_cs2_obs_overlay.cfg` from this project to `game\csgo\cfg\` in the opened CS2 folder. Confirm the destination filename ends in `.cfg`.
 4. Start Steam, sign in, then run `run_overlay.bat`. Keep the command window open. Fully exit and restart CS2 after installing GSI.

@@ -33,12 +33,18 @@ try {
     if (Test-Path -LiteralPath $installed) { throw 'GSI file still present' }
 
     $env:APPDATA = Join-Path $scratch 'AppData'
-    & (Join-Path $root 'install_startup.ps1')
-    $link = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Startup\CS2 Premier Sync Overlay.lnk'
+    $startup = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Startup'
+    $null = New-Item -ItemType Directory -Path $startup -Force
+    $legacyLink = Join-Path $startup 'CS2 Premier Sync Overlay.lnk'
     $shell = New-Object -ComObject WScript.Shell
-    if (!(Test-Path -LiteralPath $link) -or
+    $legacyShortcut = $shell.CreateShortcut($legacyLink)
+    $legacyShortcut.TargetPath = Join-Path $root 'run_overlay.bat'
+    $legacyShortcut.Save()
+    & (Join-Path $root 'install_startup.ps1')
+    $link = Join-Path $startup 'Roundframe for CS2.lnk'
+    if (!(Test-Path -LiteralPath $link) -or (Test-Path -LiteralPath $legacyLink) -or
         $shell.CreateShortcut($link).TargetPath -ne (Join-Path $root 'run_overlay.bat')) {
-        throw 'Startup shortcut target mismatch'
+        throw 'Startup shortcut migration or target mismatch'
     }
     & (Join-Path $root 'uninstall_startup.ps1')
     & (Join-Path $root 'uninstall_startup.ps1')

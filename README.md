@@ -1,42 +1,50 @@
-# CS2 Premier Sync for OBS
+# Roundframe for CS2
 
-A 640 × 180 OBS Browser Source for Windows 10 and 11. Show your CS Rating, recent matchmaking stats, and live Counter-Strike 2 scores in one scene. The preview uses fictional data.
+[![Checks](https://github.com/abhiraj109/cs2-roundframe/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/abhiraj109/cs2-roundframe/actions/workflows/ci.yml) [![MIT License](https://img.shields.io/github/license/abhiraj109/cs2-roundframe)](LICENSE)
 
-![CS2 Premier Sync banner and overlay preview with sample data](assets/screenshots/preview.png)
+A clean, compact CS2 Premier profile overlay for OBS on Windows 10 and 11. Roundframe combines your Premier Rating and recent match stats with live match details in a 640 × 180 browser source. Steam and CS2 are needed for live match data. The preview uses fictional data.
 
-## Quick start
+![Roundframe for CS2 overlay preview with fictional sample data](assets/screenshots/preview.png)
+
+## Get started
 
 1. Install [Python 3.10 or newer](https://www.python.org/downloads/windows/) and [OBS Studio](https://obsproject.com/download). Enable the Python launcher or add Python to PATH.
-2. Extract the release ZIP to a permanent folder and run `setup_once.bat` to install the CS2 Game State Integration (GSI) config. The optional Windows Startup shortcut launches this copy of the project.
-3. Run `run_overlay.bat` and fully restart CS2. In OBS add a **Browser** source with URL `http://127.0.0.1:3000/`, **Width 640** and **Height 180**. Keep **Local file** off.
-4. Open `http://127.0.0.1:3000/?demo=1` to preview fictional data. If you use the demo URL in OBS, restore `http://127.0.0.1:3000/` for live use.
+2. Download the latest **Windows ZIP** from [GitHub Releases](https://github.com/abhiraj109/cs2-roundframe/releases/latest) and extract it to a permanent folder.
+3. Run `setup_once.bat` to install the CS2 Game State Integration (GSI) config. Run `run_overlay.bat`, then fully restart CS2.
+4. In OBS, add a **Browser** source with URL `http://127.0.0.1:3000/`, width **640** and height **180**. Leave **Local file** off.
 
-See the [Windows installation guide](docs/INSTALLATION.md) for screenshots, manual GSI install, scaling, updates and uninstall. Use `stop_overlay.bat` to stop the server.
+Open `http://127.0.0.1:3000/?demo=1` to preview fictional data. For setup screenshots, scaling, updates and uninstall steps, see the [Windows installation guide](docs/INSTALLATION.md). Use `stop_overlay.bat` to stop the server.
 
-## Feature support
+## What it shows
 
-| Feature | Availability | Data source |
-| --- | --- | --- |
-| Premier Rating | When the public profile has a current CS Rating | Leetify `ranks.premier` |
-| Player name | When Steam, the local game or the public profile reports it | Steam login data, GSI, Leetify |
-| K/D | Recent recorded matches with kills and deaths | Leetify detail, or GSI history |
-| Last 20 matches | Up to 20 available matches; five recent result tiles | Leetify matchmaking, or GSI history |
-| Headshot % | When provider matches report headshot kills | Leetify match detail |
-| Win rate | When known results are available | Leetify matchmaking, or GSI history |
-| ADR | When provider matches include round and damage data | Leetify match detail |
-| Live score, map and K/D/A | When CS2 reports them for the selected account | GSI |
+| Display | Source and coverage |
+| --- | --- |
+| Premier Rating | Current rating from a public Leetify profile, when available |
+| Recent results and stats | Up to 20 processed Leetify matches; local GSI match history can fill in supported stats |
+| Headshot percentage and ADR | Leetify match details when the provider supplies them |
+| Live player, map, score and K/D/A | CS2 Game State Integration while playing |
 
-Premier and Competitive can both appear as **Matchmaking** when CS2 reports `competitive`. Wingman appears when the feed identifies it. CS Rating applies to Premier. Local history requires the overlay to see the local player during live play and receive a final score. Practice or community matches can report similar mode fields. The overlay uses either provider history or local history for a display, with missing metrics shown as dashes.
+CS2 may report both Premier and Competitive as **Matchmaking**. Local history only records matches observed while Roundframe is running and requires a final score. Missing values appear as dashes. See [data sources and metric coverage](docs/CONFIGURATION.md).
 
-Steam detection checks the active Windows Steam account, the live CS2 account, then Steam's recent-login config. Set a one-time override at `http://127.0.0.1:3000/settings`. The normal launcher looks up the selected SteamID64 with Leetify. Launch from Command Prompt with `run_overlay.bat --offline` for GSI and local history without provider requests. The Browser Source can reveal the selected Steam ID, name and avatar during a stream. See [configuration and statistics](docs/CONFIGURATION.md) and [privacy](SECURITY.md).
+## Leetify and local data
 
-## Help and development
+Roundframe can request public profile and match data from Leetify. A public profile connected to the selected Steam account is required. A `LEETIFY_API_KEY` Windows user environment variable is optional; it can help avoid unauthenticated rate limits. See [Leetify setup](docs/CONFIGURATION.md#leetify-api-key). Do not put an API key in the repository or share it in screenshots.
 
-- [Troubleshooting](docs/TROUBLESHOOTING.md) covers Python, Steam, GSI, Leetify, OBS size and port 3000.
-- [FAQ](docs/FAQ.md) answers common setup and data questions.
-- [Architecture](docs/ARCHITECTURE.md) and [local API](docs/API.md) describe the server, storage and browser.
-- Run `run_tests.bat` on Windows or `python -m unittest discover -s tests -v` from the project root. See [contributing](CONTRIBUTING.md), [test results](docs/TEST_RESULTS.md), and the [changelog](CHANGELOG.md).
+The server listens on `127.0.0.1:3000`; CS2 Game State data is sent to your own PC. Provider profile data stays in memory, while locally observed matches and your selected Steam account setting are stored under `%LOCALAPPDATA%\CS2PremierOverlay`. The OBS source can display your Steam name, SteamID64 and avatar. Use `run_overlay.bat --offline` to disable Leetify requests for that session. Read the [privacy and security notes](SECURITY.md).
+
+## Guides
+
+- [Installation, updates and uninstall](docs/INSTALLATION.md)
+- [Configuration and statistics](docs/CONFIGURATION.md)
+- [Troubleshooting](docs/TROUBLESHOOTING.md)
+- [Frequently asked questions](docs/FAQ.md)
+- [Architecture](docs/ARCHITECTURE.md) and [local HTTP API](docs/API.md)
+- [Third-party notices](docs/THIRD_PARTY.md), [license](LICENSE), and [changelog](CHANGELOG.md)
+
+## Development
+
+Roundframe uses Python's standard library and does not require `pip install`. Run `run_tests.bat` on Windows, or `python -m unittest discover -s tests -v`. See [contributing](CONTRIBUTING.md) and [test results](docs/TEST_RESULTS.md). The GitHub Actions checks run the Windows test matrix, browser JavaScript syntax check, packaging check and secret scan.
 
 ## License and attribution
 
-The project code and documentation are released under the [MIT License](LICENSE). See the [third-party notices](docs/THIRD_PARTY.md) for the Leetify attribution artwork and provider terms. This is an independent community project with no affiliation with Valve, Steam, FACEIT, Leetify or OBS Studio. Their names and marks belong to their respective owners.
+The project code and documentation are available under the [MIT License](LICENSE). The Leetify attribution artwork is governed by Leetify's terms; see [third-party notices](docs/THIRD_PARTY.md). Roundframe is an independent community project with no affiliation with Valve, Steam, FACEIT, Leetify or OBS Studio. Their names and marks belong to their respective owners.

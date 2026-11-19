@@ -1,4 +1,6 @@
-# CS2 Premier Sync for OBS 4.1.0
+# Roundframe for CS2 4.1.0
+
+This version was originally published under the project name CS2 Premier Sync for OBS.
 
 This first release packages a 640 × 180 Browser Source with Steam account detection, CS2 GSI, Premier Rating and recent matchmaking stats through Leetify, and SQLite fallback history.
 
